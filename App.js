@@ -13,6 +13,7 @@ import DeckList from "./components/DeckList";
 import AddDeck from "./components/AddDeck";
 import AddCard from "./components/AddCard";
 import Deck from "./components/Deck";
+import Quiz from "./components/Quiz";
 import {purple, white} from "./utils/colors";
 import { resetDecks } from './utils/api';
 
@@ -40,7 +41,7 @@ const TabNav = () => (
                   icon = (
                       <FontAwesome name="plus-square" size={size} color={color}/>
                   );
-              } else if (route.name === "Deck List") {
+              } else if (route.name === "Decks") {
                   icon = (
                       <Ionicons name="ios-list" size={size} color={color}/>
                   );
@@ -65,7 +66,7 @@ const TabNav = () => (
           }
       }}
   >
-      <Tabs.Screen name="Deck List" component={DeckList}/>
+      <Tabs.Screen name="Decks" component={DeckList}/>
       <Tabs.Screen name="Add Deck" component={AddDeck} options={{title: 'Add Deck'}}/>
   </Tabs.Navigator>
 );
@@ -90,6 +91,11 @@ const MainNav = () => (
             name="Add Card"
             component={AddCard}
             options={{title: 'Add Card' }}
+        />
+        <Stack.Screen
+            name="Quiz"
+            component={Quiz}
+            options={{headerShown: true, title: ''}}
         />
         <Stack.Screen
           name="Deck"

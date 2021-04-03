@@ -14,14 +14,10 @@ class Deck extends Component {
               <Text style={styles.title}>{deck.title}</Text>
               <Text style={styles.cards}>{deck.questions.length} Cards</Text>
             </View>
-            <TouchableOpacity
-              onPress={() => navigation.navigate("Add Card", { deckId: deck.title })}
-            >
+            <TouchableOpacity onPress={() => navigation.navigate("Add Card", { deckId: deck.title })}>
               <Text>Add Card</Text>
             </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => navigation.navigate("Quiz", { deckId: deck.title })}
-            >
+            <TouchableOpacity onPress={() => navigation.navigate("Quiz", { deckId: deck.title })} >
               <Text>Start Quiz</Text>
             </TouchableOpacity>
           </View>

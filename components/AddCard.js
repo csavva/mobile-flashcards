@@ -8,7 +8,7 @@ function SubmitBtn ({ onPress }) {
       <TouchableOpacity
         style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.AndroidSubmitBtn}
         onPress={onPress}>
-          <Text style={styles.submitBtnText}>Add Card</Text>
+          <Text style={styles.submitBtnText}>Submit</Text>
       </TouchableOpacity>
     )
 }
@@ -44,7 +44,6 @@ class AddCard extends Component {
     
         return (
             <View style={styles.container}>
-              <Text style={styles.title}>What is the title of your new deck?</Text>
                 <TextInput
                     style={styles.input}
                     value={question}
