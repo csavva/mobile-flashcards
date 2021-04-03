@@ -11,6 +11,7 @@ import {FontAwesome, Ionicons} from "@expo/vector-icons";
 import {createStackNavigator} from '@react-navigation/stack';
 import DeckList from "./components/DeckList";
 import AddDeck from "./components/AddDeck";
+import AddCard from "./components/AddCard";
 import Deck from "./components/Deck";
 import {purple, white} from "./utils/colors";
 import { resetDecks } from './utils/api';
@@ -84,6 +85,11 @@ const MainNav = () => (
         <Stack.Screen
             name="New Deck"
             component={AddDeck}
+        />
+        <Stack.Screen
+            name="Add Card"
+            component={AddCard}
+            options={{title: 'Add Card' }}
         />
         <Stack.Screen
           name="Deck"

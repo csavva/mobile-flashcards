@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, Platform, TouchableOpacity, TextInput} from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity} from 'react-native'
 import { connect } from 'react-redux'
 
 class Deck extends Component {
@@ -8,21 +8,22 @@ class Deck extends Component {
 
     render() {
         const { deck, navigation } = this.props;
-        console.log(deck)
         return (
           <View style={styles.container}>
             <View style={styles.titleContainer}>
-              <Text style={styles.deckTitle}>{deck.title}</Text>
+              <Text style={styles.title}>{deck.title}</Text>
               <Text style={styles.cards}>{deck.questions.length} Cards</Text>
             </View>
-            {/* <TextButton
-              text="Add Card"
-              onPress={() => navigation.navigate("AddCard", { deckId: deck.title })}
-            />
-            <TextButton
-              text="Start Quiz"
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Add Card", { deckId: deck.title })}
+            >
+              <Text>Add Card</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
               onPress={() => navigation.navigate("Quiz", { deckId: deck.title })}
-            /> */}
+            >
+              <Text>Start Quiz</Text>
+            </TouchableOpacity>
           </View>
         )
     }
