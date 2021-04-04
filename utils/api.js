@@ -43,7 +43,3 @@ export function removeEntry(key) {
     })
 
 }
-
-export function resetDecks() {
-    return AsyncStorage.clear();
-}

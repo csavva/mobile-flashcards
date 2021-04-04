@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, Platform, TouchableOpacity, TextInput} from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity} from 'react-native'
 import { connect } from 'react-redux'
 import { blue, gray, orange, pink, purple } from '../utils/colors'
 import { setLocalNotification, clearLocalNotification} from '../utils/notification'

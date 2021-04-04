@@ -1,6 +1,5 @@
-import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import {createStore} from "redux";
 import reducer from './reducers';
 import {Provider} from "react-redux";
@@ -15,7 +14,6 @@ import AddCard from "./components/AddCard";
 import Deck from "./components/Deck";
 import Quiz from "./components/Quiz";
 import {purple, white} from "./utils/colors";
-import { resetDecks } from './utils/api';
 import { setLocalNotification } from './utils/notification'
 
 const Tabs =
@@ -108,7 +106,6 @@ const MainNav = () => (
 
 export default class App extends Component {
     componentDidMount() {
-        resetDecks()
         setLocalNotification()
     }
 
