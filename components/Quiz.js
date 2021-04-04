@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, Platform, TouchableOpacity, TextInput} from 'react-native'
 import { connect } from 'react-redux'
+import { setLocalNotification, clearLocalNotification} from "../utils/notification"
 
 class Quiz extends Component {
     state = {
@@ -9,6 +10,9 @@ class Quiz extends Component {
         incorrectAnswers: 0,
         showAnswer: false,
         endOfQuiz: false
+    }
+    componentDidMount() {
+        clearLocalNotification().then(setLocalNotification)
     }
 
     handleAnswer = (userAnswer) => {

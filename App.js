@@ -16,6 +16,7 @@ import Deck from "./components/Deck";
 import Quiz from "./components/Quiz";
 import {purple, white} from "./utils/colors";
 import { resetDecks } from './utils/api';
+import { setLocalNotification } from './utils/notification'
 
 const Tabs =
     Platform.OS === "ios"
@@ -106,20 +107,23 @@ const MainNav = () => (
 );
 
 export default class App extends Component {
-  componentDidMount() {
-    resetDecks();
-  }
-  render(){
-    return (
-      <Provider store={createStore(reducer)}>
-          <View style={{flex: 1}}>
-              <NavigationContainer>
-                  {/* <UdaciStatusBar backgroundColor={purple} barStyle="light-content"/> */}
-                  <MainNav/>
-              </NavigationContainer>
-          </View>
-      </Provider>
-    );
-  }
+    componentDidMount() {
+        resetDecks()
+        setLocalNotification()
+    }
+
+    render(){
+        return (
+        <Provider store={createStore(reducer)}>
+            <View style={{flex: 1}}>
+                <NavigationContainer>
+                    {/* <UdaciStatusBar backgroundColor={purple} barStyle="light-content"/> */}
+                    <MainNav/>
+                </NavigationContainer>
+            </View>
+        </Provider>
+        );
+    }
+
 
 }
