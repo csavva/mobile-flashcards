@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import AppLoading from 'expo-app-loading'
 import { receiveDecks } from '../actions'
 import { fetchDecks } from '../utils/api'
+import { gray } from '../utils/colors'
 
 class DeckList extends Component {
     state = {
@@ -73,31 +74,31 @@ class DeckList extends Component {
   }
 
 const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
     item: {
-        padding: 20,
-        borderRadius: Platform.OS === 'ios' ? 16 : 2,
-        marginLeft: 10,
-        marginRight: 10,
-        marginTop: 17,
-        justifyContent: 'center',
-        shadowRadius:3,
-        shadowOpacity: 0.8,
-        shadowColor: 'rgba(0,0,0,24)',
-        shadowOffset: {
-            width: 0,
-            height: 3,
-        }
+      padding: 20,
+      marginLeft: 10,
+      marginRight: 10,
+      marginTop: 17,
+      justifyContent: 'center',
     },
     noDataText: {
-        fontSize: 20,
-        paddingTop: 20,
-        paddingBottom: 20
+      fontSize: 28,
+      paddingTop: 80,
+      paddingBottom: 80,
+      textAlign: 'center'
     },
     title: {
       fontSize: 32,
     },
     noOfCards: {
+      marginTop: 12,
       fontSize: 16,
+      color: gray
     },
 })
 

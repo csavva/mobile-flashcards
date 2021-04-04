@@ -1,18 +1,9 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, Platform, TouchableOpacity, TextInput} from 'react-native'
+import { View, StyleSheet, TextInput} from 'react-native'
 import { connect } from 'react-redux'
 import { addCard } from '../actions'
-
-function SubmitBtn ({ onPress }) {
-    return (
-      <TouchableOpacity
-        style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.AndroidSubmitBtn}
-        onPress={onPress}>
-          <Text style={styles.submitBtnText}>Submit</Text>
-      </TouchableOpacity>
-    )
-}
-
+import { lightPurp } from '../utils/colors'
+import TextButton from './TextButton'
 
 class AddCard extends Component {
     state = {
@@ -56,17 +47,26 @@ class AddCard extends Component {
                     onChangeText={(text) => this.setState({ answer: text })}
                     placeholder="Enter answer"
                 />
-                <SubmitBtn onPress={this.handleSubmit} />
+                <TextButton onPress={this.handleSubmit} text={'Submit'} color={lightPurp}/>
             </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin: 50,
+    },
     input: {
-        height: 40,
-        margin: 12,
+        height: 44,
+        marginBottom: 50,
+        padding: 10,
         borderWidth: 1,
+        borderRadius: 10,
+        alignSelf: 'stretch'
     },
     title: {
         fontSize: 32,

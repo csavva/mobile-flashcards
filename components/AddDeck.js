@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, Platform, TouchableOpacity, TextInput} from 'react-native'
 import { connect } from 'react-redux'
 import { addDeck } from '../actions'
+import TextButton from './TextButton'
 
 function SubmitBtn ({ onPress }) {
     return (
@@ -53,21 +54,31 @@ class AddDeck extends Component {
                     onChangeText={this.handleTextChange}
                     placeholder="Deck Title"
                 />
-                <SubmitBtn onPress={this.handleSubmit} />
+                <TextButton onPress={this.handleSubmit} text={'Create Deck'}/>
             </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin: 50,
+    },
     input: {
-        height: 40,
-        margin: 12,
+        height: 44,
+        marginTop: 50,
+        padding: 10,
         borderWidth: 1,
+        borderRadius: 10,
+        alignSelf: 'stretch'
     },
     title: {
-        fontSize: 32,
-    },
+        fontSize: 40,
+        textAlign: 'center'
+    }
 })
 
 

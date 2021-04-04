@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, Platform, TouchableOpacity, TextInput} from 'react-native'
 import { connect } from 'react-redux'
-import { setLocalNotification, clearLocalNotification} from "../utils/notification"
+import { blue, gray, orange, pink, purple } from '../utils/colors'
+import { setLocalNotification, clearLocalNotification} from '../utils/notification'
+import TextButton from './TextButton'
 
 class Quiz extends Component {
     state = {
@@ -57,7 +59,7 @@ class Quiz extends Component {
         if (totalNoOfQuestions === 0) {
             return (
                 <View style={styles.container}>
-                    <Text>
+                    <Text style={styles.score}>
                         This deck has no cards
                     </Text>
                 </View>
@@ -67,51 +69,64 @@ class Quiz extends Component {
         if (endOfQuiz) {
             return (
                 <View style={styles.container}>
-                    <Text>
-                        You scored: {correctAnswers/totalNoOfQuestions * 100}%
+                    <Text style={styles.score} >
+                        You scored: {'\n'} {correctAnswers/totalNoOfQuestions * 100}%
                     </Text>
-                    <TouchableOpacity onPress={() => this.resetQuiz()}>
-                        <Text>Restart Quiz</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => navigation.navigate("Deck", { deckTitle: route.params.deckId })}>
-                        <Text>Back to Deck</Text>
-                    </TouchableOpacity>
+                    <TextButton onPress={() => this.resetQuiz()} text={'Restart Quiz'} color={purple}/>
+                    <TextButton onPress={() => navigation.navigate("Deck", { deckTitle: route.params.deckId })} text={'Back to Deck'} color={gray}/>
                 </View>                
             )
         }
         
         return (
             <View style={styles.container}>
-                <Text>
+                <Text style={styles.questionCounter}>
                     {currentQuestion + 1}/{totalNoOfQuestions}
                 </Text>
                 {showAnswer ? 
-                    <Text style={styles.title}>{questions[currentQuestion].answer}</Text>
-                    : <Text style={styles.title}>{questions[currentQuestion].question}</Text>
+                    <Text style={styles.answer}>{questions[currentQuestion].answer}</Text>
+                    : <Text style={styles.question}>{questions[currentQuestion].question}</Text>
                     }
                 <TouchableOpacity onPress={() => this.setState({ showAnswer: !this.state.showAnswer})}>
-                    <Text>Show {showAnswer ? 'Question' : 'Answer'}</Text>
-                </TouchableOpacity>            
-                <TouchableOpacity onPress={() => this.handleAnswer('correctAnswers')}>
-                    <Text>Correct</Text>
+                    <Text style={styles.answerToggle}>{showAnswer ? 'Question' : 'Answer'}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => this.handleAnswer('incorrectAnswers')}>
-                    <Text>Incorrect</Text>
-                </TouchableOpacity>
+                <TextButton onPress={() => this.handleAnswer('correctAnswers')} text={'Correct'} color={blue}/>
+                <TextButton onPress={() => this.handleAnswer('incorrectAnswers')} text={'Incorrect'} color={pink}/>
             </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    input: {
-        height: 40,
-        margin: 12,
-        borderWidth: 1,
-    },
-    title: {
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        margin: 20,
+    },   
+    question: {
         fontSize: 32,
     },
+    score: {
+        fontSize: 50,
+        margin: 30,
+        textAlign: 'center',
+    },
+    answer: {
+        fontSize: 32,
+        color: gray,
+    },
+    questionCounter: {
+        color: gray,
+        fontSize: 20,
+        textAlign: 'left',
+        alignSelf: 'flex-start',
+        justifyContent: 'flex-start',
+        marginBottom: 40,
+    },
+    answerToggle: {
+        color: orange,
+        marginTop: 30,
+    }
 })
 
 const mapStateToProps = (state, { route }) => {

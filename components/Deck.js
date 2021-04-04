@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity} from 'react-native'
+import { View, Text, StyleSheet} from 'react-native'
 import { connect } from 'react-redux'
+import { gray, orange } from '../utils/colors'
+import TextButton from './TextButton'
 
 class Deck extends Component {
     state = {
@@ -14,26 +16,30 @@ class Deck extends Component {
               <Text style={styles.title}>{deck.title}</Text>
               <Text style={styles.cards}>{deck.questions.length} Cards</Text>
             </View>
-            <TouchableOpacity onPress={() => navigation.navigate("Add Card", { deckId: deck.title })}>
-              <Text>Add Card</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate("Quiz", { deckId: deck.title })} >
-              <Text>Start Quiz</Text>
-            </TouchableOpacity>
+            <TextButton onPress={() => navigation.navigate("Add Card", { deckId: deck.title })} text={'Add Card'} />
+            <TextButton onPress={() => navigation.navigate("Quiz", { deckId: deck.title })} text={'Start Quiz'} color={orange}/>
           </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    input: {
-        height: 40,
-        margin: 12,
-        borderWidth: 1,
-    },
-    title: {
-        fontSize: 32,
-    },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 50,
+  },
+  cards: {
+      height: 40,
+      margin: 12,
+      textAlign: 'center',
+      color: gray,
+  },
+  title: {
+    fontSize: 40,
+    textAlign: 'center'
+  }
 })
 
 const mapStateToProps = (state, { route }) => {
