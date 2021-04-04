@@ -95,7 +95,7 @@ const MainNav = () => (
         <Stack.Screen
             name="Quiz"
             component={Quiz}
-            options={{headerShown: true, title: ''}}
+            options={{headerShown: true, title: ''}, ({ route }) => ({ title: route.params.deckTitle })}
         />
         <Stack.Screen
           name="Deck"

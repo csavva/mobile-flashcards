@@ -8,6 +8,7 @@ class Quiz extends Component {
         correctAnswers: 0,
         incorrectAnswers: 0,
         showAnswer: false,
+        endOfQuiz: false
     }
 
     handleAnswer = (userAnswer) => {
@@ -16,7 +17,7 @@ class Quiz extends Component {
             [userAnswer]: this.state[userAnswer] + 1
         })
 
-        const { currentQuestion, showAnswer } = this.state
+        const { currentQuestion } = this.state
         const { questions } = this.props
 
         const totalNoOfQuestions = questions.length
@@ -27,18 +28,25 @@ class Quiz extends Component {
             })
         }else {
             this.setState({
-                currentQuestion: 0,
-                correctAnswers: 0,
-                incorrectAnswers: 0,
-                showAnswer: false,
+                endOfQuiz: true,
               });
         }
+    }
+
+    resetQuiz = () => {
+        this.setState({
+            currentQuestion: 0,
+            correctAnswers: 0,
+            incorrectAnswers: 0,
+            showAnswer: false,
+            endOfQuiz: false
+        })        
     }
     
 
     render() {
-        const { currentQuestion, showAnswer } = this.state
-        const { questions } = this.props
+        const { currentQuestion, showAnswer, endOfQuiz, correctAnswers } = this.state
+        const { questions, navigation, route } = this.props
 
         const totalNoOfQuestions = questions.length
         
@@ -49,6 +57,22 @@ class Quiz extends Component {
                         This deck has no cards
                     </Text>
                 </View>
+            )
+        }
+
+        if (endOfQuiz) {
+            return (
+                <View style={styles.container}>
+                    <Text>
+                        You scored: {correctAnswers/totalNoOfQuestions * 100}%
+                    </Text>
+                    <TouchableOpacity onPress={() => this.resetQuiz()}>
+                        <Text>Restart Quiz</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate("Deck", { deckTitle: route.params.deckId })}>
+                        <Text>Back to Deck</Text>
+                    </TouchableOpacity>
+                </View>                
             )
         }
         
@@ -88,7 +112,6 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state, { route }) => {
     const { deckId } = route.params
-    console.log(deckId)
   
     return {
         deckId,
