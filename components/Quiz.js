@@ -13,9 +13,6 @@ class Quiz extends Component {
         showAnswer: false,
         endOfQuiz: false
     }
-    componentDidMount() {
-        clearLocalNotification().then(setLocalNotification)
-    }
 
     handleAnswer = (userAnswer) => {
         this.setState({
@@ -33,6 +30,7 @@ class Quiz extends Component {
                 currentQuestion: currentQuestion + 1,
             })
         }else {
+            clearLocalNotification().then(setLocalNotification)
             this.setState({
                 endOfQuiz: true,
               });

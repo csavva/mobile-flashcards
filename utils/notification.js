@@ -1,4 +1,4 @@
-import { AsyncStorage} from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import * as Permissions from "expo-permissions"
 import * as Notifications from 'expo-notifications'
 
@@ -26,8 +26,8 @@ function createNotification() {
     }
 }
 
-export function setLocalNotification () {
-    AsyncStorage.getItem(NOTIFICATION_KEY)
+export async function setLocalNotification () {
+    await AsyncStorage.getItem(NOTIFICATION_KEY)
         .then(JSON.parse)
         .then((data) => {
             if (data === null){

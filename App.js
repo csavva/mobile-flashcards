@@ -114,7 +114,6 @@ export default class App extends Component {
         <Provider store={createStore(reducer)}>
             <View style={{flex: 1}}>
                 <NavigationContainer>
-                    {/* <UdaciStatusBar backgroundColor={purple} barStyle="light-content"/> */}
                     <MainNav/>
                 </NavigationContainer>
             </View>

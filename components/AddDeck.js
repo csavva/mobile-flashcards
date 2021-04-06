@@ -1,19 +1,8 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, Platform, TouchableOpacity, TextInput} from 'react-native'
+import { View, Text, StyleSheet, TextInput} from 'react-native'
 import { connect } from 'react-redux'
 import { addDeck } from '../actions'
 import TextButton from './TextButton'
-
-function SubmitBtn ({ onPress }) {
-    return (
-      <TouchableOpacity
-        style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.AndroidSubmitBtn}
-        onPress={onPress}>
-          <Text style={styles.submitBtnText}>Create Deck</Text>
-      </TouchableOpacity>
-    )
-}
-
 
 class AddDeck extends Component {
     state = {

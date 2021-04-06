@@ -1,45 +1,65 @@
-import { AsyncStorage } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
-const DECKS_STORAGE_KEY = 'MobileFlashcards:decks'
+const DECKS_STORAGE_KEY = '@MobileFlashcardsDecks'
 
-export function getDeck(title) {
-    const decks = AsyncStorage.getItem(DECKS_STORAGE_KEY)
-    return JSON.parse(decks)[title]
-}
-
-export function fetchDecks() {
-    return AsyncStorage.getItem(DECKS_STORAGE_KEY)
-}
-
-export function submitDeck(title) {
-    return AsyncStorage.mergeItem(DECKS_STORAGE_KEY,  JSON.stringify({
-        [title]: {
-            title,
-            questions: [],
-            noOfCards: 0
+export async function getDeck(title) {
+    try{
+        const decks = await AsyncStorage.getItem(DECKS_STORAGE_KEY)
+        if (decks != null) {
+            return JSON.parse(decks)[title]
         }
-    }))
+    }catch(error) {
+        console.warn(error);
+     }
+};
+
+export async function fetchDecks() {
+    try {
+        const decks = await AsyncStorage.getItem(DECKS_STORAGE_KEY)
+        if (decks != null) {
+            return decks
+        }
+    }catch(error){
+        console.warn(error)
+    }
+}
+
+export async function submitDeck(title) {
+    try {
+        const deckSubmitted = AsyncStorage.mergeItem(DECKS_STORAGE_KEY,  JSON.stringify({
+            [title]: {
+                title,
+                questions: [],
+                noOfCards: 0
+            }
+        }))
+        
+        if ( deckSubmitted != null) {
+            return deckSubmitted
+        }
+    }catch(error){
+        console.warn(error)
+    }
+    
 }
 
 export async function addCard(title, card) {
-    const deck = await getDeck(title)
+    
+    try{
+        const deck = await getDeck(title)
 
-    return AsyncStorage.mergeItem(
-        DECKS_STORAGE_KEY,
-        JSON.stringify({
-            [title]: {
-            questions: deck.questions.concat(card),
-            },
-        })
-    )
-}
-
-export function removeEntry(key) {
-    return AsyncStorage.getItem(DECKS_STORAGE_KEY).then((results) => {
-        const data = JSON.parse(results)
-        data[key] = undefined
-        delete data[key]
-        AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(data))
-    })
-
+        if (deck != null) {
+            return AsyncStorage.mergeItem(
+                DECKS_STORAGE_KEY,
+                JSON.stringify({
+                    [title]: {
+                    questions: deck.questions.concat(card),
+                    },
+                })
+            )
+        }
+    }catch(error) {
+        console.warn(error);
+     }
+    
 }
